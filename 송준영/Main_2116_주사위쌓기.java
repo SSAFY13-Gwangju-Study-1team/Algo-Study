@@ -1,18 +1,32 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.StringTokenizer;
 
+/**
+ * Main_2116_주사위쌓기
+ * 난이도 4/10
+ * 구현, 브루트포스
+ * 첫번째 주사위의 면이 정해지면 그 기준으로 다른 주사위는 다 정해짐
+ * 6가지 경우의 수 다 확인 + 주사위 하나당 4면 중 가장 큰 값 찾기
+ * Arrays.stream() 사용하면 오버헤드가 좀 있다
+ * for문 이용시 내 기준 276ms -> 220ms로 줄어듦
+ */
 public class Main_2116_주사위쌓기 {
     // 입력 처리
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static StringTokenizer st;
     public static void main(String[] args) throws Exception {
         int N = Integer.parseInt(br.readLine());        // 주사위 개수
         int[][] dices = new int[N][6];                  // 주사위 정보
 
         // 주사위 정보 입력 String -> int[]
         for (int i = 0; i < N; i++) {
-            dices[i] = Arrays.stream(br.readLine().split(" "))
-                            .mapToInt(Integer::parseInt).toArray();
+            // dices[i] = Arrays.stream(br.readLine().split(" "))
+            //                 .mapToInt(Integer::parseInt).toArray();
+            st = new StringTokenizer(br.readLine());
+            for (int j = 0; j < 6; j++) {
+                dices[i][j] = Integer.parseInt(st.nextToken());
+            }
         }
 
         // 최대값 출력
