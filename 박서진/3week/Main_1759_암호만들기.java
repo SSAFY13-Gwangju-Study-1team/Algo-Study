@@ -19,7 +19,7 @@ public class Main_1759_암호만들기 {
         // sort로 정렬 -> 순서는 신경쓰지 않아도 됨
         Arrays.sort(c_arr);
 
-        // c 배열에서 l개의 조합 자음 2개 이상 모음 1개 이상
+        // c 배열에서 l개의 조합 자음 2개 이상 모음 1개 이상 함수 제작
         combination(c_arr, 0, 0, c, l);
 
         System.out.println(sb);
