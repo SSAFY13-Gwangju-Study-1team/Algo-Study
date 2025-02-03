@@ -21,7 +21,7 @@ public class Main_13251_조약돌꺼내기 {
         }
 
         for (int i : stones) {
-            total += calPercent(i, sumStone);
+            total += calPercent(i, K, sumStone);
         }
         
         System.out.println(total);
@@ -34,10 +34,16 @@ public class Main_13251_조약돌꺼내기 {
         }
 
         double temp = 1.0;
+        double dN = (double)N;
+        double dsumStone = (double)sumStone;
+
 
         for (int i = 0; i < K; i++) {
-            temp *= (N-- / sumStone--);
+            System.out.println(dN + " : " + dsumStone);
+            temp *= (dN-- / dsumStone--);
         }
+
+        System.out.println("답 뭐야 : " + temp);
 
         return temp;
     }
