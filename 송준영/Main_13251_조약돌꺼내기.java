@@ -39,11 +39,11 @@ public class Main_13251_조약돌꺼내기 {
 
 
         for (int i = 0; i < K; i++) {
-            System.out.println(dN + " : " + dsumStone);
+            // System.out.println(dN + " : " + dsumStone);
             temp *= (dN-- / dsumStone--);
         }
 
-        System.out.println("답 뭐야 : " + temp);
+        // System.out.println("답 뭐야 : " + temp);
 
         return temp;
     }
