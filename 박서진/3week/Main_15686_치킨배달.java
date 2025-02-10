@@ -3,6 +3,13 @@ import java.io.*;
 
 import static java.lang.Integer.MAX_VALUE;
 import static java.lang.Integer.parseInt;
+
+/**
+ * backtracking 문제
+ * 치킨과 집 간 거리의 모든 경우의 수를 돌면서 최소 값 갱신
+ * 치킨집을 기준으로 앞에서 고르지 않았던 치킨집만 골라야 시간 초과 나지 않음
+ * 최소 값만 구하면 되는 문제니 어떤 치킨집을 골라야 하는 지는 중요하지 않음
+ */
 public class Main_15686_치킨배달 {
     static List<int[]> arr1 = new ArrayList<>();; // 집 위치 정보 리스트
     static List<int[]> arr2 = new ArrayList<>();; // 치킨집 위치 정보 리스트
@@ -34,6 +41,12 @@ public class Main_15686_치킨배달 {
         System.out.println(chicken_res);
 
     }
+
+    /**
+     * start를 기준으로 m만큼의 치킨집을 선택하며 각각의 선택에서의 치킨 거리가 구해짐
+     * @param start
+     * @param depth
+     */
     public static void backtrack(int start, int depth){
         // 종료 조건문
         if(depth==m){
