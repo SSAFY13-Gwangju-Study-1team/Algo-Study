@@ -76,11 +76,25 @@ public class Solution_14520_나무높이 {
         //     result += even * 2;
         // }
         
-        result += odd * 2;
-        even -= odd;
-        result += (even / 3) * 2;
-        result += (even % 3) + 1
-        
+        if (odd > even) {
+            result += even * 2;
+            result += (odd - even) * 2 - 1;
+        } else if (odd < even) {
+            result += odd * 2;
+            result += ((even-odd) / 3) * 4;
+            result += ((even-odd) % 3) + 1;
+        } else {
+            result += even * 2;
+        }
+
+
+        // result += (even / 3) * 4;
+        // result += (even % 3) + 1;
+        // result += (odd * 2) - 1;
+        // System.out.println(even);
+        // System.out.println(odd);
+        // System.out.println(even % 3);
+
         return result;
     }
 }
