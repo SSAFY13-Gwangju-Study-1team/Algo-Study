@@ -14,10 +14,13 @@ public class Main_2589_보물섬 {
     static boolean isVisited[][]; // 방문 처리를 위한 이차원 배열
     static int n, m;
 
+    /**
+     * x좌표와 y좌표 cost를 지정해줌 
+     */
     public static class Node {
         public int x; // 노드의 x 좌표
         public int y; // 노드이 y 좌표
-        public int cost; // 노드 간 거리 (기본 값은 0)
+        public int cost; // 노드 간 거리 - 거리 한칸에 한 시간임
 
         public Node(int x, int y, int cost) {
             this.x = x;
@@ -41,8 +44,8 @@ public class Main_2589_보물섬 {
 
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
-                if (map[i][j]=='L'){
-                    isVisited = new boolean[n][m];
+                if (map[i][j]=='L'){ // Land를 만나면 BFS를 돌려서 그 지점에서의 최대값을 찾으면 됨
+                    isVisited = new boolean[n][m]; // bfs 시작할 때마다 방문 배열을 초기화 해 주어야 각각의 지점에서 탐색이 가능함
                     res = Math.max(res, BFS(i, j));
                 }
             }
@@ -50,6 +53,12 @@ public class Main_2589_보물섬 {
         System.out.println(res);
     }
 
+    /**
+     * 
+     * @param r x 좌표
+     * @param c y 좌표
+     * @return 최대의 거리를 return 함(최소거리)
+     */
 
     public static int BFS(int r, int c){
         int[] dr = new int[]{-1, 1, 0, 0};
@@ -61,7 +70,7 @@ public class Main_2589_보물섬 {
 
         while(!dq.isEmpty()){
             Node temp = dq.poll();
-            for(int i=0;i<4;i++){
+            for(int i=0;i<4;i++){ // 4방을 돌면서 L가 있는지를 확인하는 BFS 문제
                 int nx = temp.x+dr[i];
                 int ny = temp.y+dc[i];
                 if(nx>=0 && nx<n && ny>=0 && ny<m)
