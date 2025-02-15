@@ -2,15 +2,20 @@ import java.io.*;
 import java.util.*;
 import static java.lang.Integer.parseInt;
 
+/**
+ * 연결된 L 간의 가장 긴 길을 찾는 문제
+ * 모든 구간에서의 BFS를 계산하면 됨
+ * 모든 연결된 L 구간에서 isVisited를 새로 만들어서 최단 거리 중 최대값을 찾으면 되는 문제
+ */
 public class Main_2589_보물섬 {
-    static char map[][];
-    static boolean isVisited[][];
+    static char map[][]; // 입력 받을 map
+    static boolean isVisited[][]; // 방문 처리를 위한 이차원 배열
     static int n, m;
 
     public static class Node {
-        public int x;
-        public int y;
-        public int cost;
+        public int x; // 노드의 x 좌표
+        public int y; // 노드이 y 좌표
+        public int cost; // 노드 간 거리 (기본 값은 0)
 
         public Node(int x, int y, int cost) {
             this.x = x;
@@ -26,8 +31,7 @@ public class Main_2589_보물섬 {
         m = parseInt(st.nextToken());
         map = new char[n][m];
         isVisited = new boolean[n][m];
-        int res=0;
-
+        int res=0; // 최종 결과인 최단 거리의 max 값
 
         for(int i=0;i<n;i++){
             map[i] = br.readLine().toCharArray();
@@ -36,10 +40,8 @@ public class Main_2589_보물섬 {
         for(int i=0;i<n;i++){
             for(int j=0;j<m;j++){
                 if (map[i][j]=='L'){
-                    if(!isVisited[i][j]){
-                        isVisited = new boolean[n][m];
-                        res = Math.max(res, BFS(i, j));
-                    }
+                    isVisited = new boolean[n][m];
+                    res = Math.max(res, BFS(i, j));
                 }
             }
         }
