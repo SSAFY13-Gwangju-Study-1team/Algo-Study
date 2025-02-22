@@ -29,12 +29,12 @@ public class Main_15652_N과M_4 {
             sb.append("\n");
             return;
         }
+
         if (target > n) return;
 
         // 조합에 target(현재숫자)를 다시 넣는 경우
         arr[depth] = target;
         backtracking(depth+1, target, arr);
-
         backtracking(depth, target + 1, arr);
     }
 }
