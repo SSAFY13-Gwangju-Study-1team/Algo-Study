@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 
 import static java.lang.Integer.parseInt;
 
-public class Main_15657_N과M10 {
+public class Main_15666_N과M12 {
     static int n, m;
     static int[] nums;
     static StringBuilder sb = new StringBuilder();
@@ -21,7 +21,7 @@ public class Main_15657_N과M10 {
             nums[i] = parseInt(st.nextToken());
         }
         Arrays.sort(nums);
-        backtrack(0,  0, new int[m]);
+        backtrack(0, 0, new int[m]);
         System.out.println(sb);
     }
     public static void backtrack(int depth, int start, int[] selected){
@@ -39,9 +39,8 @@ public class Main_15657_N과M10 {
             if(prevNum==nums[i]) continue;
             selected[depth] = nums[i]; //백트래킹 호출 이전에 해줘야 함 반복문을 돌면서 숫자를 선택할 때 즉시 갱신해야 해!
             prevNum = nums[i];
-            backtrack(depth+1, i+1, selected);
+            backtrack(depth+1, i, selected);
         }
-
 
 
     }

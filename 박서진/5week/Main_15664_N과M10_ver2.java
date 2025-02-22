@@ -5,10 +5,9 @@ import java.util.StringTokenizer;
 
 import static java.lang.Integer.parseInt;
 
-public class Main_15657_N과M9 {
+public class Main_15664_N과M10_ver2 {
     static int n, m;
     static int[] nums;
-    static boolean[] isVisited;
     static StringBuilder sb = new StringBuilder();
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -17,16 +16,16 @@ public class Main_15657_N과M9 {
         m = parseInt(st.nextToken());
         st = new StringTokenizer(br.readLine());
         nums = new int[n];
-        isVisited = new boolean[n];
 
         for(int i=0;i<n;i++){
             nums[i] = parseInt(st.nextToken());
         }
         Arrays.sort(nums);
-        backtrack(0,  new int[m]);
+        backtrack(0,  0, new int[m], -1);
         System.out.println(sb);
     }
-    public static void backtrack(int depth, int[] selected){
+
+    public static void backtrack(int depth, int target, int[] selected, int prevNum){
         if(depth==m){
             for(int i:selected){
                 sb.append(i).append(" ");
@@ -35,18 +34,12 @@ public class Main_15657_N과M9 {
             return;
         }
 
-        int prevNum=0;
-
-        for(int i=0;i<n;i++){
-            if (isVisited[i]) continue;
-            if(prevNum==nums[i]) continue;
-            isVisited[i] =true;
-            selected[depth] = nums[i]; //백트래킹 호출 이전에 해줘야 함 반복문을 돌면서 숫자를 선택할 때 즉시 갱신해야 해!
-            prevNum = nums[i];
-            backtrack(depth+1, selected);
-            isVisited[i] = false;
-        }
-
-
+        if (target>=n) return;
+        if(prevNum==nums[target]) return;
+        selected[depth] = nums[target];
+        // 현재 인덱스를 고를 때 
+        backtrack(depth+1, target+1, selected, -1);
+        // 현재 인덱스를 고르지 않을 때
+        backtrack(depth, target+1, selected, nums[target]);
     }
 }

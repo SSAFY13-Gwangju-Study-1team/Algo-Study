@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 
 import static java.lang.Integer.parseInt;
 
-public class Main_15657_N과M10_ver2 {
+public class Main_15664_N과M10 {
     static int n, m;
     static int[] nums;
     static StringBuilder sb = new StringBuilder();
@@ -21,11 +21,10 @@ public class Main_15657_N과M10_ver2 {
             nums[i] = parseInt(st.nextToken());
         }
         Arrays.sort(nums);
-        backtrack(0,  0, new int[m], -1);
+        backtrack(0,  0, new int[m]);
         System.out.println(sb);
     }
-
-    public static void backtrack(int depth, int target, int[] selected, int prevNum){
+    public static void backtrack(int depth, int start, int[] selected){
         if(depth==m){
             for(int i:selected){
                 sb.append(i).append(" ");
@@ -34,12 +33,16 @@ public class Main_15657_N과M10_ver2 {
             return;
         }
 
-        if (target>=n) return;
-        if(prevNum==nums[target]) return;
-        selected[depth] = nums[target];
-        // 현재 인덱스를 고를 때 
-        backtrack(depth+1, target+1, selected, -1);
-        // 현재 인덱스를 고르지 않을 때
-        backtrack(depth, target+1, selected, nums[target]);
+        int prevNum=0;
+
+        for(int i=start;i<n;i++){
+            if(prevNum==nums[i]) continue;
+            selected[depth] = nums[i]; //백트래킹 호출 이전에 해줘야 함 반복문을 돌면서 숫자를 선택할 때 즉시 갱신해야 해!
+            prevNum = nums[i];
+            backtrack(depth+1, i+1, selected);
+        }
+
+
+
     }
 }
