@@ -24,7 +24,7 @@ public class Main_2961_도영이가만든맛있는음식 {
      */
     private static void backtrack(int n, int depth, int selectedCnt, int sour, int bitter) {
         if(depth==n) {
-            if(selectedCnt>=1) {
+            if(selectedCnt>=1) { // 음식을 하나 이상 무조건 골라야 함! 이걸 안하면 아무것도 고르지 않는 공집합이 들어가서 틀릴 수 있음
                 int total = Math.abs(sour - bitter);
                 minRes = Math.min(minRes, total);
             }
