@@ -5,6 +5,10 @@ import java.util.StringTokenizer;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * N개의 자연수 중에서 M개를 고른 수열, 중복 가능 - 중복 조합
+ * 이전에 방문한 노드를 체크하고 다음에 같은 수면 pass
+ */
 public class Main_15666_N과M12 {
     static int n, m;
     static int[] nums;

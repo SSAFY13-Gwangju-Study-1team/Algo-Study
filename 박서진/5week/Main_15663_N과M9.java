@@ -5,6 +5,14 @@ import java.util.StringTokenizer;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * 수열안에 같은 수가 있을 때 같은 집합을 출력하지 않아야 함
+ * 하지만 (9,9)처럼 같은 수의 집합을 출력해야함
+ * set으로 풀려다가 다음과 같이 적용해봄
+ * 백트랙에 들어가기 전에 같은 depth에서 전에 다녀온 dfs의 숫자가 뭔지 기록하고 다음에 들어갈 때 같으면 return을 하는것임
+ * (물론 그 전에 정렬되어 있어야 같은 값 비교 가능!!)
+ * 조건을 걸고 확인하는 부분이 어려웠던 문제ㅜㅜ
+ */
 public class Main_15663_N과M9 {
     static int n, m;
     static int[] nums;
