@@ -20,9 +20,9 @@ public class Main_01알고리즘기본_gravity {
                 int start = nums[i+1];
                 if(max<start){
                     max = start;
-                    continue;
                 }else{
-                    for(int j=start;j<max;j++){
+                    for(int j=start+1;j<=max;j++){
+
                         cnt[j]++;
                     }
                 }
