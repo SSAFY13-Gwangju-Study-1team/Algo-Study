@@ -45,8 +45,5 @@ public class Main_15664_N과M10 {
             prevNum = nums[i];
             backtrack(depth+1, i+1, selected);
         }
-
-
-
     }
 }

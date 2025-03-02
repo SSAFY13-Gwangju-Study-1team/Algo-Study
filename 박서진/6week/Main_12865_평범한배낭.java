@@ -1,6 +1,10 @@
 import java.io.*;
 import java.util.*;
 import static java.lang.Integer.parseInt;
+
+/**
+ * greedy 문제 -> dp를 활용하여 (0, 1)knapsack 풀이
+ */
 public class Main_12865_평범한배낭 {
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
