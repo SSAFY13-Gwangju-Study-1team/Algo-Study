@@ -23,6 +23,8 @@ public class Main_01알고리즘기본_gravity {
                 }else{
                     for(int j=start+1;j<=max;j++){
 
+
+
                         cnt[j]++;
                     }
                 }

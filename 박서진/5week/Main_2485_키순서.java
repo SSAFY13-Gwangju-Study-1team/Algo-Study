@@ -69,6 +69,5 @@ public class Main_2485_키순서 {
             }
         }
         return cnt;
-
     }
 }
