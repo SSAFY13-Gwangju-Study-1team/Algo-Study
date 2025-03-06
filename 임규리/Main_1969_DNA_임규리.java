@@ -6,6 +6,15 @@ import java.util.StringTokenizer;
 
 import static java.lang.Integer.parseInt;
 
+/**
+ * 메모리 : 18,328 KB
+ * 시간 : 216 ms
+ * -----------------------------------------------------------
+ * 문제 이해를 못해서 G쌤 도움 받앗으요 ^_^...
+ * 1. 각 열별로 A, C, G, T의 등장 횟수 세기
+ * 2. 가장 많이 등장한 문자를 sb.append()
+ * 3. 전체 N에서 가장 많이 등장한 횟수를 뺀 값을 hamming distance에 더함
+ */
 public class Main_1969_DNA_임규리 {
 
     static int N;   // DNA의 수
