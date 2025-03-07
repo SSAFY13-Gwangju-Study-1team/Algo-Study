@@ -22,20 +22,20 @@ public class Main_10816_숫자카드2_송준영 {
     static StringBuilder sb = new StringBuilder();
 
     static int N, M;    // 숫자 카드 수, 찾을 숫자 수
-    static Map<Integer, Integer> nums = new HashMap<>();    // 숫자 카드를 담을 해시맵
+    static Map<String, Integer> nums = new HashMap<>();    // 숫자 카드를 담을 해시맵
 
     public static void main(String[] args) throws Exception {
         // 입력 처리
         N = parseInt(br.readLine());
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
-            int temp = parseInt(st.nextToken());
+            String temp = st.nextToken();
             nums.put(temp, nums.getOrDefault(temp, 0) + 1);   // 해시맵에 넣어주기, 값이 없으면 0을 넣어주고 1을 더해줌, 있다면 원래 값에 1을 더해줌
         }
         M = parseInt(br.readLine());
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < M; i++) {
-            int temp = parseInt(st.nextToken());
+            String temp = st.nextToken();
             sb.append(nums.getOrDefault(temp, 0) + " "); // 해시맵에 있는지 확인하고 있으면 출력
         }
 
