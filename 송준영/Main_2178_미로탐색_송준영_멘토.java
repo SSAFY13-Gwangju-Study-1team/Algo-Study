@@ -16,7 +16,7 @@ import java.util.StringTokenizer;
  * visited를 boolean으로 지정하지 않고 int로 지정해주면서 방문했을 때의 거리를 저장해주며 문제를 해결했다.
  * 이게 가능한 이유는 BFS의 특성 때문인데 BFS는 방문시 만나는 노드가 무조건 최단거리를 보장하기 때문에 가능하다 (각 간선의 가중치가 없거나 일정할때)
  */
-public class Main_2178_미로탐색_송준영 {
+public class Main_2178_미로탐색_송준영_멘토 {
     // 빠른 입출력을 위한 선언
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
