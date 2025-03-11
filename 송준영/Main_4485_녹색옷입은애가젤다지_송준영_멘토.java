@@ -1,6 +1,6 @@
 import java.io.*;
-import java.util.*;
 import static java.lang.Integer.parseInt;
+import java.util.*;
 
 /**
  * Main_4485_녹색옷입은애가젤다지
@@ -14,7 +14,7 @@ import static java.lang.Integer.parseInt;
  * (첨 알았음)PriorityQueue의 정렬 기준은 Lambda 함수로 구현이 된다! -> comparable, comparator 구현 필요 x
  * isIn 메서드로 범위 체크를 해주었다
  */
-public class Main_4485_녹색옷입은애가젤다지 {
+public class Main_4485_녹색옷입은애가젤다지_송준영_멘토 {
     // 빠른 입출력을 위한 변수
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
