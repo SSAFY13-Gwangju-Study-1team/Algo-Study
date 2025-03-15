@@ -3,6 +3,7 @@ import java.util.*;
 import static java.lang.Integer.parseInt;
 
 /**
+ * 0과 1이 여러개 일수도 있다는 사실
  * 배열을 쭉 따라가면서 코드를 작성했는데 q를 이용해서 양수와 음수를 나누어 계산하는 풀이를 보았는데 그게 훨씬 간단해보였다
  */
 public class Main_1744_수묶기 {
