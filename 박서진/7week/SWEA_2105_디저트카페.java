@@ -15,6 +15,7 @@ public class SWEA_2105_디저트카페 {
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
         StringBuilder sb = new StringBuilder();
         int tc = parseInt(br.readLine());
         for(int t=1; t<=tc;t++){
