@@ -9,6 +9,7 @@ import static java.lang.Integer.parseInt;
  * 중복순열로 하는 경우 4^50 -> 불가
  * 한 자리수의 뉴클레오티드가 정해지면 그 다음 선택에 영향을 주지 않음 -> 그리디
  */
+
 public class Main_1969_DNA {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -26,7 +27,7 @@ public class Main_1969_DNA {
         //<----구현---->//
         // m자리수를 돌면서 열 순회를 하면서 각 뉴클레오티드의 개수를 센다
         for(int i=0;i<m;i++){
-            int[] indiCnt = new int[4]; //TGCA 사전 순서
+            int[] indiCnt = new int[4]; //TAGC 순서
             for(int j=0;j<n;j++){
                 if(dna[j][i] == 'T'){
                     indiCnt[0]+=1;
