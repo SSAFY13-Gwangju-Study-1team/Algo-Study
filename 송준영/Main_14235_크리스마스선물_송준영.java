@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import static java.lang.Integer.parseInt;
+import java.util.Collections;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
@@ -13,7 +14,7 @@ public class Main_14235_크리스마스선물_송준영 {
     static int n;
 
     public static void main(String[] args) throws Exception {
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
         n = parseInt(br.readLine());
 
         for (int i = 0; i < n; i++) {
