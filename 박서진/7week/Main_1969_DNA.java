@@ -3,6 +3,13 @@ import java.util.*;
 
 import static java.lang.Integer.max;
 import static java.lang.Integer.parseInt;
+
+/**
+ * 그리디로 풀어야함
+ * 중복순열로 하는 경우 4^50 -> 불가
+ * 한 자리수의 뉴클레오티드가 정해지면 그 다음 선택에 영향을 주지 않음 -> 그리디
+ */
+
 public class Main_1969_DNA {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -17,6 +24,8 @@ public class Main_1969_DNA {
             dna[i] = st.nextToken().toCharArray();
         }
 
+        //<----구현---->//
+        // m자리수를 돌면서 열 순회를 하면서 각 뉴클레오티드의 개수를 센다
         for(int i=0;i<m;i++){
             int[] indiCnt = new int[4]; //TAGC 순서
             for(int j=0;j<n;j++){
@@ -41,6 +50,7 @@ public class Main_1969_DNA {
                 }
             }
             // 전체에서 max를 뺀 나머지가 들어감
+            // hammingD: 특정 뉴클레오티드가 정해졌을 때 이와 다른 뉴클레오티드의 수
             hammingD += n-maxChar;
 
             if(maxIndex == 0){
