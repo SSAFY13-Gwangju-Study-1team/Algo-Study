@@ -31,7 +31,6 @@ public class Main_20300_서강근육맨 {
             index2--;
         }
 
-
         // n이 홀수라면
 
         if(n%2!=0){

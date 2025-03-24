@@ -27,7 +27,8 @@ public class Main_1969_DNA {
         //<----구현---->//
         // m자리수를 돌면서 열 순회를 하면서 각 뉴클레오티드의 개수를 센다
         for(int i=0;i<m;i++){
-            int[] indiCnt = new int[4]; //TAGC 순서
+            int[] indiCnt = new int[4]; //TGCA 사전 순서
+
             for(int j=0;j<n;j++){
                 if(dna[j][i] == 'T'){
                     indiCnt[0]+=1;
