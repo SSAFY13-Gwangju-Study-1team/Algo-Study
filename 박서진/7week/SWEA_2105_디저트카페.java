@@ -18,6 +18,7 @@ public class SWEA_2105_디저트카페 {
             StringBuilder sb = new StringBuilder();
             int tc = parseInt(br.readLine());
             for(int t=1; t<=tc;t++){
+
             n = parseInt(br.readLine());
             maxEat = Integer.MIN_VALUE;
             map = new int[n][n];
