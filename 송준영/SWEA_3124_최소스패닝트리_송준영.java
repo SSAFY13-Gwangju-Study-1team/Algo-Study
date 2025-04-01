@@ -5,11 +5,10 @@ import java.util.*;
 
 /**
  * SWEA_3124_최소스패닝트리
- * 난이도 4/10
- * MST
- * 1889ms 122mb
+ * Prim 알고리즘 사용
+ * 난이도 5/10
+ * 2447ms 162mb
  * 
- * 크루스칼 알고리즘을 이용하여 최소 스패닝 트리를 구하는 문제
  */
 public class SWEA_3124_최소스패닝트리_송준영 {
     // 빠른 입출력을 위한 선언
@@ -17,23 +16,37 @@ public class SWEA_3124_최소스패닝트리_송준영 {
     static StringTokenizer st;
     static StringBuilder sb = new StringBuilder();
 
-    static int T, V, E;         // 테케 수, 정점 수, 간선 수
-    static List<int[]> list;    // 간선 리스트
-    static int[] parent;        // 부모 배열
+    static int T, V, E;             // 테스트 케이스 수, 정점 수, 간선 수
+    static List<List<Node>> list;   // 인접 리스트
+    static boolean[] visited;       // 방문 여부
+
+    // Node 클래스 정의
+    // Comparable 인터페이스를 구현하여 가중치 기준으로 정렬
+    static class Node implements Comparable<Node> {
+        int v, w;
+        Node(int v, int w) {
+            this.v = v;
+            this.w = w;
+        }
+
+        @Override
+        public int compareTo(Node o) {
+            return Integer.compare(this.w, o.w);
+        }
+    }
 
     public static void main(String[] args) throws Exception {
-        // 테케 수 입력 및 반복
+        // 테스트 케이스 입력 및 반복
         T = parseInt(br.readLine());
         for (int t = 1; t <= T; t++) {
             sb.append(String.format("#%d %d\n", t, solve()));
         }
-        // 결과 출력
         System.out.println(sb);
     }
 
     /**
      * 메인 메서드
-     * @return
+     * @return  최소 스패닝 트리의 가중치 합
      * @throws Exception
      */
     public static long solve() throws Exception {
@@ -41,65 +54,57 @@ public class SWEA_3124_최소스패닝트리_송준영 {
         st = new StringTokenizer(br.readLine());
         V = parseInt(st.nextToken());
         E = parseInt(st.nextToken());
+
         list = new ArrayList<>();
-        parent = new int[V+1];
-        for (int i = 1; i < V+1; i++) {
-            parent[i] = i;
+        for (int i = 0; i <= V; i++) {
+            list.add(new ArrayList<>());
         }
+
         for (int i = 0; i < E; i++) {
             st = new StringTokenizer(br.readLine());
-            int A = parseInt(st.nextToken());
-            int B = parseInt(st.nextToken());
-            int C = parseInt(st.nextToken());
-            list.add(new int[] { C, A, B });
+            int from = parseInt(st.nextToken());
+            int to = parseInt(st.nextToken());
+            int weight = parseInt(st.nextToken());
+
+            list.get(from).add(new Node(to, weight));
+            list.get(to).add(new Node(from, weight)); // 무향 그래프
         }
 
-        // 가중치를 기준으로 오름차순 정렬
-        Collections.sort(list, (o1, o2) -> {
-            return o1[0] - o2[0];
-        });
+        return prim();  // Prim 알고리즘 호출
+    }
 
+    /**
+     * Prim 알고리즘
+     * @return  최소 스패닝 트리의 가중치 합
+     */
+    public static long prim() {
+        PriorityQueue<Node> pq = new PriorityQueue<>(); // 가중치 기준 오름차순 정렬
+        visited = new boolean[V + 1];                   // 방문 여부
+        long total = 0;                                 // 가중치 합    
+        int cnt = 0;                                    // 정점 개수
 
-        int cnt = 0;        // 현재 선택한 간선 수
-        long result = 0;    // 결과값
+        pq.offer(new Node(1, 0)); // 임의의 정점(1번)에서 시작
 
-        // 크루스칼 알고리즘
-        for (int[] e : list) {
-            if (union(e[1], e[2])) {    // 사이클이 발생하지 않으면 넣기
-                result += e[0];
-                // System.out.println("?");
-                if (++cnt == (V - 1)) break;    // 간선 수가 정점 수 - 1이면 종료
+        // Prim 알고리즘 수행
+        // 방문하지 않은 정점 중에서 가중치가 가장 작은 간선을 선택하여 방문 처리
+        while (!pq.isEmpty()) {
+            Node current = pq.poll();
+
+            if (visited[current.v]) continue;   // 이미 방문한 정점이면 skip
+
+            visited[current.v] = true;        // 방문 처리
+            total += current.w;           // 가중치 합에 추가
+            cnt++;                      // 정점 개수 증가
+
+            if (cnt == V) break;        // 모든 정점을 방문했으면 종료
+
+            for (Node next : list.get(current.v)) {
+                if (!visited[next.v]) {
+                    pq.offer(next);
+                }
             }
         }
 
-        return result;  // 결과 반환
-    }
-
-    /**
-     * 부모 찾기
-     * @param x 부모 찾을 정점
-     * @return  부모
-     */
-    public static int find(int x) {
-        if (parent[x] == x) return x;
-
-        return parent[x] = find(parent[x]);   // 경로 압축
-    }
-
-    /**
-     * 합치기
-     * @param x 
-     * @param y
-     * @return  합쳐졌는지 여부
-     */
-    public static boolean union(int x, int y) {
-        int px = find(x);
-        int py = find(y);
-
-        if (px == py) return false; // 부모가 같으면 사이클 발생, false 반환
-
-        if (px < py) parent[py] = px;   // 작은 쪽으로 합치기
-        else parent[px] = py;
-        return true;    // 합쳐졌다면 true 반환
+        return total;           // 최소 스패닝 트리의 가중치 합 반환
     }
 }

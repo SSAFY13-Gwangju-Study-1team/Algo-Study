@@ -9,7 +9,7 @@ import java.util.*;
  * MST
  * 744ms 122mb
  * 
- * 크루스칼 알고리즘을 이용하여 최소 스패닝 트리를 구하는 문제
+ * 프림 알고리즘을 이용하여 최소 스패닝 트리를 구하는 문제
  * 소수 계산과 모든 정점 사이의 거리 계산이 들어있어 생각보다 복잡하다
  * 하지만 그것만 유의하면 똑같이 MST 풀이로 풀 수 있다
  */
@@ -20,9 +20,10 @@ public class SWEA_1251_하나로_송준영 {
     static StringBuilder sb = new StringBuilder();
 
     static int T, N;            // 테케 수, 정점 수
-    static int[] X, Y, parent;  // x좌표, y좌표, 부모 배열
+    static int[] X, Y;  // x좌표, y좌표, 부모 배열
     static double tax;          // 세율
-    static List<double[]> list; // 간선 리스트
+    static double[][] list; // 인접배열
+    static boolean[] visited; // 방문 여부
 
     public static void main(String[] args) throws Exception {
         // 테케 수 입력 및 반복
@@ -45,73 +46,52 @@ public class SWEA_1251_하나로_송준영 {
         X = new int[N];
         Y = new int[N];
         st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < N; i++) {
-            X[i] = parseInt(st.nextToken());
-        }
+        for (int i = 0; i < N; i++) X[i] = parseInt(st.nextToken());
         st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < N; i++) {
-            Y[i] = parseInt(st.nextToken());
-        }
+        for (int i = 0; i < N; i++) Y[i] = parseInt(st.nextToken());
         tax = Double.parseDouble(br.readLine());
-        parent = new int[N];
+    
+        list = new double[N][N];    // 인접 배열 초기화
+        visited = new boolean[N];   // 방문 배열 초기화
+    
+        // 거리 계산
         for (int i = 0; i < N; i++) {
-            parent[i] = i;
-        }
-        list = new ArrayList<>();
-
-        // 모든 정점 사이의 거리 계산
-        for (int i = 0; i < N - 1; i++) {
-            for (int j = i + 1; j < N; j++) {
-                list.add(new double[] { calDist(X[i], Y[i], X[j], Y[j]) , i, j });  // 거리, 정점1, 정점2
+            for (int j = 0; j < N; j++) {
+                double dist = calDist(X[i], Y[i], X[j], Y[j]);  // 두 점 사이의 거리 계산
+                list[i][j] = dist;
+                list[j][i] = dist;
             }
         }
-
-        // 거리를 기준으로 오름차순 정렬
-        Collections.sort(list, (o1, o2) -> {
-            return Double.compare(o1[0], o2[0]); // 오름차순 (Double.compare 사용 -> 빼기로 하면 안 됨)
-        });
-
-        int cnt = 0;        // 현재 선택한 간선 수
+    
+        int cnt = 0;        // 정점 개수
         double result = 0;  // 결과값
-
-        for (double[] e : list) {
-            if (union((int) e[1], (int) e[2])) {    // 사이클이 발생하지 않으면 넣기
-                result += (tax * Math.pow(e[0], 2));    // 세율 * 거리^2
-                if(++cnt == N - 1) break;           // 간선 수가 정점 수 - 1이면 종료
+        PriorityQueue<double[]> pq = new PriorityQueue<>((o1, o2) -> Double.compare(o1[1], o2[1])); // 가중치 기준으로 정렬
+        pq.offer(new double[] {0, 0}); // 정점 번호, 가중치
+        
+        // 프림 알고리즘 수행
+        while (!pq.isEmpty()) {
+            double[] current = pq.poll();
+            int idx = (int) current[0];
+            double weight = current[1];
+    
+            if (visited[idx]) continue; // 이미 방문한 정점이면 skip
+            visited[idx] = true;        // 방문 처리
+    
+            result += weight;           // 가중치 합
+            cnt++;                      // 정점 개수 증가
+            
+            if (cnt == N) break;        // 모든 정점을 방문했으면 종료
+    
+            for (int i = 0; i < N; i++) {
+                if (!visited[i]) {
+                    pq.offer(new double[] {i, Math.pow(list[idx][i], 2) * tax});    // 인접 정점과의 거리 계산 후 우선순위 큐에 추가
+                }
             }
         }
-
-        // 반올림하여 반환
-        return Math.round(result);
+    
+        return Math.round(result);  // 결과값을 반올림하여 반환
     }
-
-    /**
-     * 부모 찾기
-     * @param x 부모 찾을 정점
-     * @return  부모
-     */
-    public static int find(int x) {
-        if (parent[x] == x) return x;
-
-        return parent[x] = find(parent[x]);   // 경로 압축
-    }
-
-    /**
-     * 합치기
-     * @param x 
-     * @param y
-     * @return  합쳐졌는지 여부
-     */
-    public static boolean union(int x, int y) {
-        int px = find(x);
-        int py = find(y);
-
-        if (px == py) return false; // 부모가 같으면 사이클 발생, false 반환
-
-        if (px < py) parent[py] = px;   // 작은 쪽으로 합치기
-        else parent[px] = py;
-        return true;    // 합쳐졌다면 true 반환
-    }
+    
 
     /**
      * 두 점 사이의 거리 계산
