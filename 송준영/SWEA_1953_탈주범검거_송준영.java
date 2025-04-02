@@ -19,6 +19,7 @@ public class SWEA_1953_탈주범검거_송준영 {
 
 
     public static void main(String[] args) throws Exception {
+        pipe.put(1, Set.of());
         pipe.put(1, Set.of(0, 1, 2, 3));
         pipe.put(2, Set.of(0, 2));
         pipe.put(3, Set.of(1, 3));
