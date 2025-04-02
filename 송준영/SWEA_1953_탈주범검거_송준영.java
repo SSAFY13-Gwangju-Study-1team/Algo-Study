@@ -19,16 +19,14 @@ public class SWEA_1953_탈주범검거_송준영 {
 
 
     public static void main(String[] args) throws Exception {
-        pipe.put(1, Set.of());
-        pipe.put(1, Set.of(0, 1, 2, 3));
-        pipe.put(2, Set.of(0, 2));
-        pipe.put(3, Set.of(1, 3));
-        pipe.put(4, Set.of(0, 1));
-        pipe.put(5, Set.of(1, 2));
-        pipe.put(6, Set.of(2, 3));
-        pipe.put(7, Set.of(0, 3));
-
-        System.out.println(pipe.get(1));
+        pipe.put(0, new HashSet<>());
+        pipe.put(1, new HashSet<>(Arrays.asList(0, 1, 2, 3)));
+        pipe.put(2, new HashSet<>(Arrays.asList(0, 2)));
+        pipe.put(3, new HashSet<>(Arrays.asList(1, 3)));
+        pipe.put(4, new HashSet<>(Arrays.asList(0, 1)));
+        pipe.put(5, new HashSet<>(Arrays.asList(1, 2)));
+        pipe.put(6, new HashSet<>(Arrays.asList(2, 3)));
+        pipe.put(7, new HashSet<>(Arrays.asList(0, 3)));
 
 
         T = parseInt(br.readLine());
@@ -75,11 +73,12 @@ public class SWEA_1953_탈주범검거_송준영 {
 
             for (int i = 0; i < 4; i++) {
                 int nx = x + dx[i], ny = y + dy[i];
-                System.out.println(map[x][y] + " 결과 : " + pipe.get(map[x][y]));
+                // System.out.println(map[x][y] + " 결과 : " + pipe.get(map[x][y]));
 
                 // 일단 맵 밖에 안나가고 방문 안했으며 파이프가 연결되어 있고 그 통로로 갈 수 있는 경우
-                if (isIn(nx, ny) && visited[nx][ny] == 0 && pipe.get(map[x][y]).contains(i) && pipe.get(map[nx][ny]).contains(i)) {
+                if (isIn(nx, ny) && visited[nx][ny] == 0 && pipe.get(map[x][y]).contains(i) && pipe.get(map[nx][ny]).contains((i + 2) % 4)) {
                     visited[nx][ny] = visited[x][y] + 1;
+                    // System.out.println(nx + " " + ny);
                     cnt++;
                     q.offer(new int[] { nx, ny });
                 }
