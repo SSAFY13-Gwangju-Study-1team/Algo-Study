@@ -64,7 +64,7 @@ public class SWEA_1949_등산로조성_송준영 {
                 if (maxPeek < map[i][j]) {
                     peeks.clear();
                     maxPeek = map[i][j];
-                    peeks.add(new int[] { i, j }); 
+                    peeks.add(new int[] { i, j });
                 } else if (maxPeek == map[i][j]) {
                     peeks.add(new int[] { i, j }); 
                 }
@@ -97,7 +97,6 @@ public class SWEA_1949_등산로조성_송준영 {
     
             if (!isIn(nx, ny)) continue;        // 범위 체크
             if (isVisited[nx][ny]) continue;    // 방문 체크
-    
     
             // 절벽을 아직 깎지 않은 경우
             if (flag == 0) {
