@@ -20,16 +20,17 @@ public class Main_12865_평범한배낭_송준영 {
     // 빠른 입출력을 위한 선언
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
-    static StringBuilder sb = new StringBuilder();
 
-    static int N, K;
-    static int[][] things, dp;
+    static int N, K;            // 물건 수, 가방 용량
+    static int[][] things, dp;  // 물건 정보(부피, 가치), DP 테이블
 
     public static void main(String[] args) throws Exception {
+        // 입력 처리 및 초기화
         st = new StringTokenizer(br.readLine());
         N = parseInt(st.nextToken());
         K = parseInt(st.nextToken());
 
+        // 물건 정보 초기화
         things = new int[N+1][2];
         for (int i = 1; i <= N; i++) {
             st = new StringTokenizer(br.readLine());
@@ -38,17 +39,21 @@ public class Main_12865_평범한배낭_송준영 {
             things[i][1] = v;
         }
 
+        // DP 테이블 초기화
         dp = new int[N+1][K+1];
+
+        // DP 테이블 채우기
         for (int i = 1; i <= N; i++) {
             for (int j = 0; j <= K; j++) {
-                if (j - things[i][0] >= 0) {
-                    dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j - things[i][0]] + things[i][1]);
-                } else {
+                if (j - things[i][0] >= 0) {    // 현재 물건을 넣을 수 있는 경우
+                    dp[i][j] = Math.max(dp[i-1][j], dp[i-1][j - things[i][0]] + things[i][1]);  // 물건을 넣는 경우와 넣지 않는 경우 비교
+                } else {                        // 현재 물건을 넣을 수 없는 경우
                     dp[i][j] = dp[i-1][j];
                 }
             }
         }
 
-        System.out.println(dp[N][K]);
+        // 결과 출력
+        System.out.println(dp[N][K]);   // 최대 가치 출력 -> N번째 물건까지 고려했을 때, K 용량의 배낭에 담을 수 있는 최대 가치
     }
 }
