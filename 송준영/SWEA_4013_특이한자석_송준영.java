@@ -1,43 +1,56 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import static java.lang.Integer.parseInt;
-import java.util.*;
+import java.util.StringTokenizer;
 
 /**
- * Main_14891_톱니바퀴
- * 난이도 5/10 
- * 구현? 시뮬레이션
- * 108ms 14mb
+ * SWEA_4013_특이한자석
+ * 난이도 6/10
+ * 시뮬레이션
+ * 92ms 26mb
  * 
- * 톱니바퀴를 회전시키는 문제
- * 처음에는 리스트나 queue로 직점 돌릴까 했지만 오버헤드가 클 것 같아 12시 방향을 기준 인덱스로 잡고 인덱스만 회전 시키기로 했다
- * 그러기 위해서 % 연산을 사용해서 인덱스를 계산해 주었다
- * 
- * 회전시킬 톱니바퀴의 왼쪽과 오른쪽 톱니바퀴를 비교해서 회전 여부를 결정해 주었다
- * 회전시킬때 다 같이 돌아야 하므로 회전여부를 일단 저장해두었다가 한 번에 처리해 주었다
  */
-public class Main_14891_톱니바퀴_송준영 {
+public class SWEA_4013_특이한자석_송준영 {
     // 빠른 입출력을 위한 선언
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
+    static StringBuilder sb = new StringBuilder();
+
+    static int T;                           // 테케 수
 
     static char[][] gear;                   // 톱니바퀴
     static int K;                           // 회전 횟수
     static int[][] rotate;                  // 회전 정보
-    static int[] index = { 0, 0, 0, 0 };    // 톱니바퀴 인덱스 (12시 방향)
 
     public static void main(String[] args) throws Exception {
+        // 테케 수 입력 및 반복
+        T = parseInt(br.readLine());
+        for (int t = 1; t <= T; t++) {
+            sb.append(String.format("#%d %d\n", t, solve()));
+        }
+
+        // 출력
+        System.out.println(sb);
+    }
+
+    public static int solve() throws Exception {
         // 입력 처리 초기화
+        K = parseInt(br.readLine());
         gear = new char[4][8];
         for (int i = 0; i < 4; i++) {
-            gear[i] = br.readLine().toCharArray();
+            st = new StringTokenizer(br.readLine());
+            // gear[i] = br.readLine().toCharArray();
+            for (int j = 0; j < 8; j++) {
+                gear[i][j] = st.nextToken().charAt(0);
+            }
         }
-        K = parseInt(br.readLine());
         rotate = new int[K][2];
         for (int i = 0; i < K; i++) {
             st = new StringTokenizer(br.readLine());
             rotate[i][0] = parseInt(st.nextToken()) - 1;
             rotate[i][1] = parseInt(st.nextToken());
         }
+        int[] index = { 0, 0, 0, 0 };    // 톱니바퀴 인덱스 (12시 방향)
 
         // 회전 수만큼 회전시키기
         for (int[] temp : rotate) {
@@ -87,7 +100,7 @@ public class Main_14891_톱니바퀴_송준영 {
             }
         }
 
-        // 결과 출력
-        System.out.println(result);
+        return result;  // 결과 리턴
     }
+
 }
