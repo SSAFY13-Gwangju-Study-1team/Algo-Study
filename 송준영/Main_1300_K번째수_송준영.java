@@ -12,20 +12,17 @@ public class Main_1300_K번째수_송준영 {
         N = parseInt(br.readLine());
         K = parseInt(br.readLine());
 
-        long l = 0;
+        long l = 1;
         long r = N * N;
 
         while (l <= r) {
             long mid = (l + r) / 2;
-            long cal = calcul(mid);
+            long count = calcul(mid);
 
-            if (K == cal) {
-                System.out.println(mid);
-                return;
-            } else if (K < cal) {
-                r = mid - 1;
-            } else {
+            if (count < K) {
                 l = mid + 1;
+            } else {
+                r = mid - 1;
             }
         }
 
@@ -35,9 +32,8 @@ public class Main_1300_K번째수_송준영 {
     public static long calcul(long mid) {
         long order = 0;
         for (long i = 1; i <= N; i++) {
-            order += Math.min(N, mid/i);
+            order += Math.min(N, mid / i);
         }
-
         return order;
     }
 }
