@@ -26,7 +26,6 @@ public class Main_24391_귀찮은해강이_송준영 {
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
             int x = parseInt(st.nextToken()), y = parseInt(st.nextToken());
-
             union(x, y);
         }
 
@@ -38,10 +37,7 @@ public class Main_24391_귀찮은해강이_송준영 {
 
         int result = 0;
         for (int i = 0; i < N-1; i++) {
-            int a = find(arr[i]);
-            int b = find(arr[i+1]);
-
-            if (a != b) result++;
+            if (find(arr[i]) != find(arr[i+1])) result++;
         }
 
         System.out.println(result);
