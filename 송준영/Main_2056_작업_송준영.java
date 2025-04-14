@@ -8,12 +8,12 @@ public class Main_2056_작업_송준영 {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static StringTokenizer st;
 
-    static int N;
-    static List<List<Integer>> graph;
-    static int[] indegree;
-    static int[] values;
-    static int[] startTime;
-    static int result;
+    static int N;                       // 작업의 개수
+    static List<List<Integer>> graph;   // 그래프 (현재 작업에서 갈 수 있는 작업들을 잇는다)
+    static int[] indegree;              // 진입 차수
+    static int[] values;                // 작업 시간
+    static int[] startTime;             // 시작 시간
+    static int result;                  // 결과값
 
     public static void main(String[] args) throws Exception {
         N = parseInt(br.readLine());
@@ -37,11 +37,15 @@ public class Main_2056_작업_송준영 {
                 graph.get(next).add(i);
             }
         }
-        phaseSort();
+
+        phaseSort();        // 위상 정렬을 통해 작업의 시작 시간을 계산
 
         System.out.println(result);
     }
 
+    /**
+     * 위상 정렬을 통해 작업의 시작 시간을 계산하는 메서드
+     */
     public static void phaseSort() {
         Queue<Integer> q = new ArrayDeque<>();
 
@@ -53,7 +57,7 @@ public class Main_2056_작업_송준영 {
             int cur = q.poll();
 
             for (int next : graph.get(cur)) {
-                startTime[next] = Math.max(startTime[next], startTime[cur] + values[cur]);
+                startTime[next] = Math.max(startTime[next], startTime[cur] + values[cur]);  // 다음 작업의 시작 시간을 계산, 현재 작업의 시작 시간 + 현재 작업의 소요 시간
                 if (--indegree[next] == 0) q.offer(next);
             }
         }
