@@ -48,10 +48,10 @@ public class Main_11066_파일합치기_송준영 {
 
         for (int len = 2; len <= K; len++) {    // len: 합병할 파일의 개수
             for (int i = 1; i <= K - len + 1; i++) {
-                int j = i + len - 1;
+                int j = i + len - 1;            // ex) i=1, len=2 -> j=2 / i=2, len=2 -> j=3
                 dp[i][j] = Integer.MAX_VALUE;   // 초기화
 
-                for (int k = i; k < j; k++) {   // 반으로 나눴을때 합병 비용 중 제일 최소 찾기
+                for (int k = i; k < j; k++) {   // 반으로 나눴을때 합병 비용 중 제일 최소 찾기 ex) i=1, j=3 -> k=1,2 (1~2, 3) (1, 2~3)
                     int cost = dp[i][k] + dp[k + 1][j] + (prefixSum[j] - prefixSum[i - 1]); // i~j까지의 합병 비용, dp 부분에 추가로 더하는 값도 추가하니까 그럼 ex) 30 + 40 -> 70 => 140
                     dp[i][j] = Math.min(dp[i][j], cost);
                 }
