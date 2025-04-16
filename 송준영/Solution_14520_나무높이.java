@@ -31,11 +31,7 @@ public class Solution_14520_나무높이 {
         int[] trees;
         int maxTree = 0;
         int result = 0;
-        int differ = 0;
         int odd = 0, even = 0;
-        int temp = 0;
-
-        int test = 0;
 
         N = Integer.parseInt(br.readLine());
         trees = new int[N];
@@ -47,53 +43,16 @@ public class Solution_14520_나무높이 {
 
         // 차이 저장
         for (int i = 0; i < N; i++) {
-            differ += maxTree - trees[i];
-            // even += (maxTree - trees[i]) / 3;
-            // odd += (maxTree - trees[i]) / 3;
             even += (maxTree - trees[i]) / 2;
             odd += (maxTree - trees[i]) % 2;
-            // test += (maxTree - trees[i]) / 3;
-            // if ((maxTree - trees[i]) % 3 == 1) {
-            //     odd++;
-            // } else if ((maxTree - trees[i]) % 3 == 2) {
-            //     even++;
-            // }
         }
-
-        // System.out.println(odd + " " + even);
-
-        // if (odd > even) {
-        //     result += even * 2;
-        //     differ = odd - even;
-        //     result += (differ / 3) * 2;
-        //     result += differ % 3;
-        // } else if (odd < even) {
-        //     result += odd * 2;
-        //     differ = (even - odd) * 2;
-        //     result += (differ / 3) * 2;
-        //     result += differ % 3;
-        // } else {
-        //     result += even * 2;
-        // }
         
-        if (odd > even) {
-            result += even * 2;
-            result += (odd - even) * 2 - 1;
-        } else if (odd < even) {
-            result += odd * 2;
-            result += ((even-odd) / 3) * 4;
-            result += ((even-odd) % 3) + 1;
-        } else {
-            result += even * 2;
-        }
+        int temp = Math.max(even - odd, 0) / 3;
 
-
-        // result += (even / 3) * 4;
-        // result += (even % 3) + 1;
-        // result += (odd * 2) - 1;
-        // System.out.println(even);
-        // System.out.println(odd);
-        // System.out.println(even % 3);
+        even -= temp;
+        odd += temp * 2;
+        int oddEvenMin = Math.min(odd, even);
+        result	= oddEvenMin * 2 + Math.max((odd - oddEvenMin) * 2 - 1, 0) + (even - oddEvenMin) / 2 * 3 + (even - oddEvenMin) % 2 * 2;
 
         return result;
     }
