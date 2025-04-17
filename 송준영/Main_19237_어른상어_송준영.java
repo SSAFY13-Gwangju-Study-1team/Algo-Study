@@ -80,6 +80,11 @@ public class Main_19237_어른상어_송준영 {
             }
         }
 
+        printMap();   // 디버깅용
+        printShark(); // 디버깅용
+        System.out.println("time : " + time); // 디버깅용
+        System.out.println("====================="); // 디버깅용
+
         // 1000초 동안 반복
         // 상어가 1마리 남을 때까지 반복
         // 만약 1000초가 지나도 상어가 1마리 남지 않으면 -1 출력
@@ -109,6 +114,11 @@ public class Main_19237_어른상어_송준영 {
             }
 
             time++; // 시간 증가
+
+            printMap();   // 디버깅용
+            printShark(); // 디버깅용
+            System.out.println("time : " + time); // 디버깅용
+            System.out.println("====================="); // 디버깅용
         }
 
         // 1000초가 지나도 상어가 1마리 남지 않으면 -1 출력
@@ -216,7 +226,7 @@ public class Main_19237_어른상어_송준영 {
 
         for (int key : keys) {
             int[] temp = sharks.get(key);
-            System.out.println(String.format("((%d))[x : %d, y : %d, dir : %d]", key, temp[0], temp[1], temp[2]));
+            System.out.println(String.format("상어((%d))[x : %d, y : %d, dir : %d]", key, temp[0], temp[1], temp[2]));
         }
     }
 }
