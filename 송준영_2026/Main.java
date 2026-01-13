@@ -18,9 +18,11 @@ public class Main {
             st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
-
-            startMap.computeIfAbsent(a, k -> new TreeSet<>()).add(b);
-            endMap.computeIfAbsent(b, k -> new TreeSet<>()).add(a);
+            
+            startMap.putIfAbsent(a, new TreeSet<>());
+            startMap.get(a).add(b);
+            endMap.putIfAbsent(b, new TreeSet<>());
+            endMap.get(b).add(a);
         }
 
         int q = Integer.parseInt(br.readLine());
